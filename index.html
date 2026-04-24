@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Interaktif - Dampak Sosial Informatika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+        :root {
+            --pastel-red: #ffadad;
+            --pastel-orange: #ffd6a5;
+            --pastel-yellow: #fdffb6;
+            --pastel-green: #caffbf;
+            --pastel-blue: #9bf6ff;
+            --pastel-indigo: #a0c4ff;
+            --pastel-purple: #bdb2ff;
+            --pastel-pink: #ffc6ff;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-pink), var(--pastel-yellow));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            border: 4px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            filter: brightness(1.05);
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .case-study {
+            border-left: 8px solid var(--pastel-purple);
+            background: rgba(189, 178, 255, 0.1);
+            border-radius: 0 1rem 1rem 0;
+        }
+
+        .rainbow-text {
+            background: linear-gradient(to right, #ff6b6b, #feca57, #1dd1a1, #48dbfb, #a0c4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .btn-pastel {
+            background: linear-gradient(135deg, var(--pastel-indigo), var(--pastel-purple));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 9999px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(160, 196, 255, 0.4);
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-pastel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(160, 196, 255, 0.6);
+            filter: brightness(1.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--pastel-yellow); }
+        ::-webkit-scrollbar-thumb { background: var(--pastel-indigo); border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8 animate-float">
+            <h1 class="text-4xl md:text-5xl font-bold rainbow-text mb-2">Dampak Sosial Informatika</h1>
+            <p class="text-gray-600 font-semibold italic text-lg bg-white/50 inline-block px-4 py-1 rounded-full">Kelas 8 SMP - Kurikulum Merdeka 🚀</p>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+            <button onclick="showSection('home')" class="nav-btn p-4 glass-card flex flex-col items-center justify-center hover:bg-[#ffadad]/20 border-[#ffadad]">
+                <i class="fas fa-home text-2xl mb-2 text-[#ff6b6b]"></i>
+                <span class="text-xs font-bold text-gray-700">Menu Utama</span>
+            </button>
+            <button onclick="showSection('media-sosial')" class="nav-btn p-4 glass-card flex flex-col items-center justify-center hover:bg-[#ffd6a5]/20 border-[#ffd6a5]">
+                <i class="fas fa-users text-2xl mb-2 text-[#feca57]"></i>
+                <span class="text-xs font-bold text-gray-700">Media Sosial</span>
+            </button>
+            <button onclick="showSection('cyberbullying')" class="nav-btn p-4 glass-card flex flex-col items-center justify-center hover:bg-[#caffbf]/20 border-[#caffbf]">
+                <i class="fas fa-shield-alt text-2xl mb-2 text-[#1dd1a1]"></i>
+                <span class="text-xs font-bold text-gray-700">Cyberbullying</span>
+            </button>
+            <button onclick="showSection('hoax')" class="nav-btn p-4 glass-card flex flex-col items-center justify-center hover:bg-[#9bf6ff]/20 border-[#9bf6ff]">
+                <i class="fas fa-search text-2xl mb-2 text-[#48dbfb]"></i>
+                <span class="text-xs font-bold text-gray-700">Hoax & Data</span>
+            </button>
+            <button onclick="showSection('refleksi')" class="nav-btn p-4 glass-card flex flex-col items-center justify-center hover:bg-[#bdb2ff]/20 border-[#bdb2ff]">
+                <i class="fas fa-brain text-2xl mb-2 text-[#5f27cd]"></i>
+                <span class="text-xs font-bold text-gray-700">Refleksi</span>
+            </button>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="glass-card p-6 md:p-10 relative overflow-hidden">
+            
+            <!-- HOME SECTION -->
+            <section id="home" class="content-section active">
+                <div class="flex flex-col items-center text-center">
+                    <!-- SVG Ilustrasi Pengganti -->
+                    <svg class="w-64 h-64 mb-6 animate-float" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="90" fill="#a0c4ff" opacity="0.2"/>
+                        <rect x="40" y="60" width="120" height="80" rx="10" fill="#bdb2ff" />
+                        <rect x="50" y="70" width="100" height="60" rx="5" fill="#ffffff" />
+                        <circle cx="100" cy="150" r="15" fill="#ffadad" />
+                        <path d="M70 90 L130 90 M70 105 L110 105 M70 120 L120 120" stroke="#a0c4ff" stroke-width="4" stroke-linecap="round" />
+                        <path d="M160 50 Q180 50 180 70" stroke="#ffd6a5" stroke-width="5" fill="none" />
+                        <circle cx="180" cy="70" r="5" fill="#ffd6a5" />
+                    </svg>
+
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Halo, Sobat Informatika! 👋</h2>
+                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                        Dunia digital itu luas banget, lho! Seperti koin yang punya dua sisi, informatika juga punya dampak positif dan negatif bagi kehidupan kita sehari-hari. Ayo kita pelajari cara menjadi <b>Warga Digital yang Cerdas</b>!
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="showSection('media-sosial')" class="btn-pastel text-lg">Mulai Belajar Sekarang! ✨</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEDIA SOSIAL SECTION -->
+            <section id="media-sosial" class="content-section">
+                <h2 class="text-3xl font-bold text-orange-400 mb-6 flex items-center gap-3">
+                    <span class="p-2 bg-orange-100 rounded-lg"><i class="fas fa-users"></i></span>
+                    Media Sosial & Interaksi
+                </h2>
+                <div class="space-y-6">
+                    <div class="bg-blue-50 p-6 rounded-2xl border-2 border-blue-100">
+                        <h3 class="font-bold text-xl mb-2 text-blue-700">Ruang Bertemu Secara Maya 🌐</h3>
+                        <p class="text-gray-700 leading-relaxed">Media sosial mempermudah kita berkomunikasi tanpa batas jarak. Namun, buku Informatika kita mengingatkan bahwa cara kita berkomunikasi di dunia maya harus sama sopannya dengan di dunia nyata.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-5 rounded-2xl bg-[#caffbf]/30 border-2 border-[#caffbf] relative">
+                            <div class="absolute -top-3 -right-3 bg-green-400 text-white p-2 rounded-full"><i class="fas fa-check"></i></div>
+                            <h4 class="font-bold text-green-700 text-lg mb-2">Sisi Terang (Positif)</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-star text-yellow-500 mr-2"></i> Belajar hal baru melalui video edukasi.</li>
+                                <li><i class="fas fa-star text-yellow-500 mr-2"></i> Menjaga silaturahmi dengan teman jauh.</li>
+                                <li><i class="fas fa-star text-yellow-500 mr-2"></i> Tempat berkarya dan pamer bakat positif.</li>
+                            </ul>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-[#ffadad]/30 border-2 border-[#ffadad] relative">
+                            <div class="absolute -top-3 -right-3 bg-red-400 text-white p-2 rounded-full"><i class="fas fa-exclamation-triangle"></i></div>
+                            <h4 class="font-bold text-red-700 text-lg mb-2">Sisi Gelap (Negatif)</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-bolt text-orange-500 mr-2"></i> Lupa waktu dan mengabaikan tugas sekolah.</li>
+                                <li><i class="fas fa-bolt text-orange-500 mr-2"></i> Mengurangi waktu ngobrol langsung.</li>
+                                <li><i class="fas fa-bolt text-orange-500 mr-2"></i> Membandingkan diri dengan hidup orang lain.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="case-study p-6">
+                        <p class="font-bold text-purple-700 text-lg mb-2">💡 Contoh di Sekitarmu:</p>
+                        <p class="text-gray-700 italic leading-relaxed">"Saat istirahat sekolah, Rian dan teman-temannya duduk melingkar tapi semuanya sibuk melihat HP masing-masing tanpa ada pembicaraan. Mereka hadir secara fisik, tapi pikiran mereka ada di tempat lain."</p>
+                    </div>
+                    
+                    <button onclick="showSection('cyberbullying')" class="mt-6 btn-pastel w-full">Lanjut Bahas Cyberbullying 🛡️</button>
+                </div>
+            </section>
+
+            <!-- CYBERBULLYING SECTION -->
+            <section id="cyberbullying" class="content-section">
+                <h2 class="text-3xl font-bold text-emerald-500 mb-6 flex items-center gap-3">
+                    <span class="p-2 bg-emerald-100 rounded-lg"><i class="fas fa-shield-alt"></i></span>
+                    Waspada Cyberbullying!
+                </h2>
+                <div class="bg-red-50 p-6 rounded-2xl mb-8 border-2 border-red-100">
+                    <p class="text-gray-700 leading-relaxed italic">
+                        "Jadikan jarimu sebagai alat kebaikan, bukan senjata untuk menyakiti." 
+                    </p>
+                    <p class="mt-2 text-gray-800 font-semibold">Cyberbullying adalah tindakan intimidasi yang dilakukan lewat media sosial, chat, atau game online.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="text-red-400 text-2xl"><i class="fas fa-keyboard"></i></div>
+                        <div>
+                            <h4 class="font-bold">Flaming</h4>
+                            <p class="text-xs text-gray-500">Mengirim pesan dengan nada marah dan menghina.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="text-blue-400 text-2xl"><i class="fas fa-user-slash"></i></div>
+                        <div>
+                            <h4 class="font-bold">Exclusion</h4>
+                            <p class="text-xs text-gray-500">Sengaja mengeluarkan teman dari grup agar dia merasa sedih.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="text-purple-400 text-2xl"><i class="fas fa-camera"></i></div>
+                        <div>
+                            <h4 class="font-bold">Outing</h4>
+                            <p class="text-xs text-gray-500">Menyebarkan rahasia atau foto pribadi orang lain tanpa izin.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="text-green-400 text-2xl"><i class="fas fa-id-card-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold">Impersonation</h4>
+                            <p class="text-xs text-gray-500">Menyamar jadi orang lain untuk merusak reputasinya.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study p-6 mb-6">
+                    <p class="font-bold text-purple-700 text-lg mb-2">💡 Kasus Nyata:</p>
+                    <p class="text-gray-700 italic leading-relaxed">"Seorang siswi mendapatkan puluhan komentar negatif di Instagram karena video tariannya. Hal ini membuatnya kehilangan rasa percaya diri dan takut berkreasi lagi."</p>
+                </div>
+
+                <button onclick="showSection('hoax')" class="mt-4 btn-pastel w-full">Cek Fakta & Data 🔍</button>
+            </section>
+
+            <!-- HOAX SECTION -->
+            <section id="hoax" class="content-section">
+                <h2 class="text-3xl font-bold text-cyan-500 mb-6 flex items-center gap-3">
+                    <span class="p-2 bg-cyan-100 rounded-lg"><i class="fas fa-search"></i></span>
+                    Hoax & Keamanan Data
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="p-6 rounded-2xl bg-yellow-50 border-2 border-yellow-200">
+                        <h3 class="font-bold text-xl text-yellow-700 mb-4"><i class="fas fa-filter mr-2"></i> Saring Sebelum Sharing!</h3>
+                        <p class="text-gray-700 mb-4">Jangan langsung percaya berita yang "Terlalu Heboh" atau menyuruh "Sebarkan ke semua grup".</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                                <i class="fas fa-link text-blue-400 mb-1"></i>
+                                <p class="text-[10px] font-bold">Cek Link</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                                <i class="fas fa-calendar-alt text-green-400 mb-1"></i>
+                                <p class="text-[10px] font-bold">Cek Tanggal</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                                <i class="fas fa-user-edit text-orange-400 mb-1"></i>
+                                <p class="text-[10px] font-bold">Cek Penulis</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                                <i class="fas fa-images text-purple-400 mb-1"></i>
+                                <p class="text-[10px] font-bold">Cek Foto</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-indigo-50 border-2 border-indigo-100">
+                        <h3 class="font-bold text-xl text-indigo-700 mb-2">Kunci Rapat Data Pribadimu 🔑</h3>
+                        <p class="text-gray-700 mb-4">Data pribadi adalah aset berharga. Jika bocor, bisa disalahgunakan oleh orang jahat.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold">#NoPassword</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold">#NoOTP</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold">#NoAlamat</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold">#NoNIK</span>
+                        </div>
+                    </div>
+
+                    <div class="case-study p-6">
+                        <p class="font-bold text-purple-700 text-lg mb-2">💡 Cerita Pendek:</p>
+                        <p class="text-gray-700 italic leading-relaxed">"Fika tergiur link 'Top Up Diamond Game Gratis' dan memasukkan password akunnya. Keesokan harinya, ia tidak bisa masuk ke akun gamenya karena sudah diambil orang lain."</p>
+                    </div>
+                </div>
+
+                <button onclick="showSection('refleksi')" class="mt-8 btn-pastel w-full">Ayo Refleksi Diri 🧠</button>
+            </section>
+
+            <!-- REFLEKSI SECTION -->
+            <section id="refleksi" class="content-section">
+                <h2 class="text-3xl font-bold text-purple-600 mb-6 flex items-center gap-3">
+                    <span class="p-2 bg-purple-100 rounded-lg"><i class="fas fa-brain"></i></span>
+                    Cek Pemahamanmu
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="p-6 glass-card border-[#ffadad] bg-white/40">
+                        <h4 class="font-bold text-gray-800 mb-3 underline">Pertanyaan 1:</h4>
+                        <p class="text-gray-700">Jika kamu melihat berita tentang tawuran antar sekolah di sebuah grup chat, apa langkah pertama yang kamu lakukan?</p>
+                    </div>
+
+                    <div class="p-6 glass-card border-[#9bf6ff] bg-white/40">
+                        <h4 class="font-bold text-gray-800 mb-3 underline">Pertanyaan 2:</h4>
+                        <p class="text-gray-700">Pernahkah kamu membagikan foto temanmu tanpa izin? Bagaimana kira-kira perasaannya jika foto itu memalukan baginya?</p>
+                    </div>
+
+                    <div class="p-6 glass-card border-[#caffbf] bg-white/40">
+                        <h4 class="font-bold text-gray-800 mb-3 underline">Pertanyaan 3:</h4>
+                        <p class="text-gray-700">Apa satu kebiasaan burukmu saat menggunakan HP yang ingin kamu ubah setelah mempelajari materi ini?</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center p-8 rounded-3xl bg-gradient-to-r from-blue-50 to-pink-50 border-2 border-white shadow-inner">
+                    <h3 class="text-2xl font-bold mb-4 rainbow-text">Keren Banget Kamu Sudah Selesai! 🌈</h3>
+                    <p class="mb-6 text-gray-600">Pilih satu emoji yang menggambarkan perasaanmu hari ini:</p>
+                    <div class="flex justify-center flex-wrap gap-4">
+                        <button onclick="celebrate('Pintar! 🧠')" class="group flex flex-col items-center">
+                            <span class="text-4xl p-4 bg-white rounded-2xl shadow hover:scale-125 transition-transform duration-300">🧠</span>
+                            <span class="text-xs mt-2 font-bold text-gray-500 opacity-0 group-hover:opacity-100">Lebih Paham</span>
+                        </button>
+                        <button onclick="celebrate('Siap Jaga Diri! 🛡️')" class="group flex flex-col items-center">
+                            <span class="text-4xl p-4 bg-white rounded-2xl shadow hover:scale-125 transition-transform duration-300">🛡️</span>
+                            <span class="text-xs mt-2 font-bold text-gray-500 opacity-0 group-hover:opacity-100">Siap Aman</span>
+                        </button>
+                        <button onclick="celebrate('Semangat Digital! 🚀')" class="group flex flex-col items-center">
+                            <span class="text-4xl p-4 bg-white rounded-2xl shadow hover:scale-125 transition-transform duration-300">🚀</span>
+                            <span class="text-xs mt-2 font-bold text-gray-500 opacity-0 group-hover:opacity-100">Gas Pol!</span>
+                        </button>
+                    </div>
+                    <div id="status-msg" class="mt-8 text-xl font-bold text-indigo-600 h-8"></div>
+                </div>
+
+                <button onclick="showSection('home')" class="mt-8 text-gray-500 hover:text-indigo-600 transition font-bold"><i class="fas fa-arrow-left mr-2"></i> Kembali ke Awal</button>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-10 text-white font-bold drop-shadow-md pb-10">
+            <p>© 2024 Media Pembelajaran Informatika | SMP Kelas VIII</p>
+            <p class="text-xs opacity-80 mt-1">Dibuat dengan ❤️ untuk Pendidikan Indonesia</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(id) {
+            const sections = document.querySelectorAll('.content-section');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Delay showing to allow for a smooth fade
+            setTimeout(() => {
+                const target = document.getElementById(id);
+                target.classList.add('active');
+            }, 50);
+
+            // Simple visual feedback for nav active state (optional)
+            navButtons.forEach(btn => {
+                btn.style.boxShadow = "0 10px 30px rgba(0,0,0,0.1)";
+            });
+            
+            // Scroll smoothly to the container
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function celebrate(msg) {
+            const status = document.getElementById('status-msg');
+            status.innerText = "Yesss! " + msg;
+            
+            // Pulse animation
+            status.style.animation = 'none';
+            status.offsetHeight; /* trigger reflow */
+            status.style.animation = 'fadeIn 0.5s ease-out';
+            
+            // Simple console log for tracking interaction
+            console.log("Siswa memilih refleksi: " + msg);
+        }
+
+        // Initialize with Home
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Aplikasi Media Pembelajaran Interaktif Berhasil Dimuat!");
+        });
+    </script>
+</body>
+</html>
